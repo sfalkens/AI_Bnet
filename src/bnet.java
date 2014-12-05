@@ -137,6 +137,38 @@ public class Bnet {
 		
 		Bnet b = new Bnet();
 		b.handle_input(args);
+		
+		//All of these tests run correctly!
+		/*System.out.println("My sanity checks: ==================");
+		Variable v = new Variable('x', Variable.Type.NONE);
+		
+		double test1 = v.P(b.B, 1, -1, -1);
+		System.out.println("P(B = t): " + test1);
+		
+		double test2 = v.P(b.B, 0, -1, -1);
+		System.out.println("P(B = f): " + test2);
+		
+		double test3 = v.P(b.A, 1, 0, 1);
+		System.out.println("P(A = t given B = f and E = t): " + test3);
+		
+		double test4 = v.P(b.A, 0, 0, 1);
+		System.out.println("P(A = f given B = f and E = t): " + test4);
+		
+		double test5 = v.P(b.J, 1, 1, -1);
+		System.out.println("P(J = t given A = t): " + test5);
+		
+		double test6 = v.P(b.J, 1, 0, -1);
+		System.out.println("P(J = t given A = f): " + test6);
+		
+		double test7 = v.P(b.J, 0, 1, -1);
+		System.out.println("P(J = f given A = t): " + test7);
+		
+		double test8 = v.P(b.J, 0, 0, -1);
+		System.out.println("P(J = f given A = f): " + test8);
+		
+		double test9 = v.P(b.M, 1, 0, -1);
+		System.out.println("P(M = t given A = f): " + test9);*/
+		
 		double answer = calculate(b.B, b.E, b.A, b.J, b.M);
 		System.out.println("The probability is: " + answer);	
 	}
