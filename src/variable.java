@@ -134,8 +134,7 @@ public class Variable {
 		System.out.println("Probability: " + probability);
 		System.out.println("\n");
 		return probability;
-		
-		
+			
 	}
 	
 }

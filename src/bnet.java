@@ -19,14 +19,14 @@ public class Bnet {
 	public void set_for_true(Variable v, boolean given) {
 		v.s_end = 0;
 		if (given == true) {
-			v.g_end = 1;
+			v.g_end = 0;
 		} 
 	}
 	
 	public void set_for_false(Variable v, boolean given) {
 		v.s_start = 1;
 		if (given == true) {
-			v.g_start = 2;
+			v.g_start = 1;
 		} 
 	}
 	
@@ -170,131 +170,7 @@ public class Bnet {
 		System.out.println("P(M = t given A = f): " + test9);*/
 		
 		double answer = calculate(b.B, b.E, b.A, b.J, b.M);
-		System.out.println("The probability is: " + answer);	
-	}
-
-	
-	/*
-	//Reads our input from command line and separates into query and evidence
-	public void handle_input(String[] args) {
-		boolean contains_given = false;
-		int given_index = -1;
-		
-		for (int i = 0; i < args.length; i++) {
-			if (args[i].equalsIgnoreCase("given")) {
-				contains_given = true;
-				given_index = i;
-			}
-		}
-		
-		if (contains_given == true) {
-			for (int i = 0; i < given_index; i++) {
-				Variable v = get_var(args, i);
-				this.variables.add(v);
-			}
-			
-			for (int i = given_index+1; i < args.length; i++) {
-				Variable v = get_var(args, i);
-				this.evidence.add(v);
-			}
-		} else {
-			for (int i = 0; i < args.length; i++) {
-				Variable v = get_var(args, i);
-				this.variables.add(v);
-			}
-		}
+		System.out.println("The probability is: " + answer);
 		
 	}
-	
-	//Given an input such as 'At' splits into variable Alarm and boolean true
-	public static Variable get_var(String[] args, int i) {
-		Variable v = new Variable();
-		v.letter = args[i].charAt(0);
-		
-		if ((v.letter == 'b') || (v.letter == 'B')) {
-			v.type = Variable.Type.INITIAL;
-		} else if ((v.letter == 'e') || (v.letter == 'E')) {
-			v.type = Variable.Type.INITIAL;
-		} else if ((v.letter == 'a') || (v.letter == 'A')) {
-			v.type = Variable.Type.INTERMEDIATE;
-		} else if ((v.letter == 'j') || (v.letter == 'J')) {
-			v.type = Variable.Type.END;
-		} else if ((v.letter == 'm') || (v.letter == 'M')) {
-			v.type = Variable.Type.END;
-		} else {
-			v.type = Variable.Type.NONE;
-		}
-		
-		if (args[i].charAt(1) == 't') {
-			v.bool = true;
-		} else {
-			v.bool = false;
-		}
-		
-		return v;
-	}
-		
-	//Given a variable, prints information and sets Bnet value apropriately
-	public void handle_variable(Variable v) {
-		if ((v.letter == 'a') || (v.letter == 'A')) {
-			System.out.print("Alarm");
-			if (v.bool == true) {
-				this.a.iBool = 1;
-			} else {
-				this.a.iBool = 0; 
-			}
-		} else if ((v.letter == 'b') || (v.letter == 'B')) {
-			System.out.print("Burglary");
-			if (v.bool == true) {
-				this.b.iBool = 1;
-			} else {
-				this.b.iBool = 0; 
-			}
-		} else if ((v.letter == 'e') || (v.letter == 'E')){
-			System.out.print("Earthquake");
-			if (v.bool == true) {
-				this.e.iBool = 1;
-			} else {
-				this.e.iBool = 0; 
-			}
-		} else if ((v.letter == 'm') || (v.letter == 'M')) {
-			System.out.print("Mary calls");
-			if (v.bool == true) {
-				this.m.iBool = 1;
-			} else {
-				this.m.iBool = 0; 
-			}
-		} else if ((v.letter == 'j') || (v.letter == 'J')) {
-			System.out.print("John calls");
-			if (v.bool == true) {
-				this.j.iBool = 1;
-			} else {
-				this.j.iBool = 0; 
-			}
-		} else {
-			System.out.print("Unknown ");
-		}
-		
-		System.out.print(" is " + v.bool + "\n");
-	}
-	
-	//Prints what we are looking for and what we know
-	public void handle_information() {
-		System.out.println("We are looking for the following information: ");
-		for (int i = 0; i < this.variables.size(); i++) {
-			handle_variable(variables.get(i));
-		}
-		
-		System.out.println("We know the following information: ");
-		for (int i = 0; i < this.evidence.size(); i++) {
-			handle_variable(evidence.get(i));
-		}
-	}
-	
-	//Returns the joint probability of the five events
-	public double computeProbability(boolean b, boolean e, boolean a, boolean j, boolean m) {
-		
-		return 0;
-	}
-	*/
 }
