@@ -87,11 +87,11 @@ public class Bnet {
 		
 			//Our numerator is search
 			double n = 0;
-			for (int e = E.s_start; e < E.s_end; e++) { //Earthquake
-				for (int b = B.s_start; b < B.s_end; b++) { //Burglary
-					for (int a = A.s_start; a < A.s_end; a++) { //Alarm
-						for (int j = J.s_start; j < J.s_end; j++) { //John calls
-							for (int m = M.s_start; m < M.s_end; m++) { //Mary calls
+			for (int e = E.s_start; e <= E.s_end; e++) { //Earthquake
+				for (int b = B.s_start; b <= B.s_end; b++) { //Burglary
+					for (int a = A.s_start; a <= A.s_end; a++) { //Alarm
+						for (int j = J.s_start; j <= J.s_end; j++) { //John calls
+							for (int m = M.s_start; m <= M.s_end; m++) { //Mary calls
 								n = n + (v.P(B, b, -1, -1) * v.P(E, e, -1, -1) * v.P(A, a, b, e) * v.P(J, j, a, -1) * v.P(M, m, a, -1));
 								System.out.println("N: " + n);
 							}
@@ -102,11 +102,11 @@ public class Bnet {
 
 			//Our denominator is given 
 			double d = 0;
-			for (int e = E.g_start; e < E.g_end; e++) { //Earthquake
-				for (int b = B.g_start; b < B.g_end; b++) { //Burglary
-					for (int a = A.g_start; a < A.g_end; a++) { //Alarm
-						for (int j = J.g_start; j < J.g_end; j++) { //John calls
-							for (int m = M.g_start; m < M.g_end; m++) { //Mary calls
+			for (int e = E.g_start; e <= E.g_end; e++) { //Earthquake
+				for (int b = B.g_start; b <= B.g_end; b++) { //Burglary
+					for (int a = A.g_start; a <= A.g_end; a++) { //Alarm
+						for (int j = J.g_start; j <= J.g_end; j++) { //John calls
+							for (int m = M.g_start; m <= M.g_end; m++) { //Mary calls
 								d = d + (v.P(B, b, -1, -1) * v.P(E, e, -1, -1) * v.P(A, a, b, e) * v.P(J, j, a, -1) * v.P(M, m, a, -1));
 								System.out.println("D: " + d);
 							}
