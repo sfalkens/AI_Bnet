@@ -20,22 +20,18 @@ public class Variable {
 	public enum Type {
 		INITIAL, INTERMEDIATE, END, NONE
 	}
-		
-	Type type;
 	
 	char letter;
-	int iBool; //Get rid of me!
+	Type type;
 	
 	int s_start;
 	int s_end;
 	int g_start;
 	int g_end;
 	
-	//double[] probabilities;
-	
 	//Default constructor
-	public Variable(Type t) {		
-		int iBool = 0;
+	public Variable(char l, Type t) {
+		letter = l;
 		type = t;
 		
 		s_start = 0;
@@ -46,20 +42,21 @@ public class Variable {
 	
 	public double P(Variable query, int value, int p1, int p2) {
 		if (query.type == Type.INITIAL) { //No parents
-			if ((query.letter == 'B') || (query.letter == 'b')) { //If dealing with Burglary
+			if (query.letter == 'B') { //If dealing with Burglary
 				if (value == 1) {
 					return PB;
 				}
 				return (1-PB);
 			} 
-			
 			//Else if dealing with Earthquake
 			if (value == 1) {
 				return PE;
 			}
 			return (1-PE);
+			
+			
 		} else if (query.type == Type.INTERMEDIATE) { //Two parents (B = p1, E = p2)
-			if ((query.letter == 'A') || (query.letter == 'a')) {
+			if (query.letter == 'A') {
 				if ((p1 == 1) && (p2 == 1)) { //B = t and E = t
 					if (value == 1) {
 						return PA_BT_ET;
@@ -80,44 +77,36 @@ public class Variable {
 						return PA_BF_EF;
 					}
 					return (1 - PA_BF_EF);
-				} else {
-					return -1000000;
-				}
-			}
-			return -1000000; //Error has occured! Only intermediate should be Alarm
+				} 
+			}	
 		} else if (query.type == Type.END) { //One parent
-			if ((query.letter == 'J') || (query.letter == 'j')) {
+			if (query.letter == 'J') {
 				if (p1 == 1) { //If A = t
 					if (value == 1) {
 						return PJ_AT;
 					}
 					return (1 - PJ_AT);
-				} else if (p1 == 0) { //If A = f
+				} else { //If A = f
 					if (value == 1) {
 						return PJ_AF;
 					}
 					return (1 - PJ_AF);
-				} else {
-					return -1000000;
-				}
-			} else if ((query.letter == 'M') || (query.letter == 'm')) {
+				} 
+			} else if (query.letter == 'M') {
 				if (p1 == 1) { //If A = t
 					if (value == 1) {
 						return PM_AT;
 					}
 					return (1 - PM_AT);
-				} else if (p1 == 0) { //If A = f
+				} else { //If A = f
 					if (value == 1) {
 						return PM_AF;
 					}
 					return (1 - PM_AF);
-				} else {
-					return -1000000;
-				}
+				} 
 			}
-			return -10000;
 		}
-		return -10000;
+		return -1000000; //Error
 	}
 	
 }
