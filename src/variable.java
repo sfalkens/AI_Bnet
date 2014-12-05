@@ -45,7 +45,7 @@ public class Variable {
 	}
 	
 	public double P(Variable query, Variable p1, Variable p2) {
-		if (type == Type.INITIAL) { //No parents
+		if (query.type == Type.INITIAL) { //No parents
 			if ((query.letter == 'B') || (query.letter == 'b')) { //If dealing with Burglary
 				if (query.iBool == 1) {
 					return PB;
@@ -58,7 +58,7 @@ public class Variable {
 				return PE;
 			}
 			return (1-PE);
-		} else if (type == Type.INTERMEDIATE) { //Two parents (B = p1, E = p2)
+		} else if (query.type == Type.INTERMEDIATE) { //Two parents (B = p1, E = p2)
 			if ((query.letter == 'A') || (query.letter == 'a')) {
 				if ((p1.iBool == 1) && (p2.iBool == 1)) { //B = t and E = t
 					if (query.iBool == 1) {
@@ -85,7 +85,7 @@ public class Variable {
 				}
 			}
 			return -1000000; //Error has occured! Only intermediate should be Alarm
-		} else if (type == Type.END) { //One parent
+		} else if (query.type == Type.END) { //One parent
 			if ((query.letter == 'J') || (query.letter == 'j')) {
 				if (p1.iBool == 1) { //If A = t
 					if (query.iBool == 1) {
