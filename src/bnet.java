@@ -2,9 +2,6 @@ import java.util.ArrayList;
 
 public class Bnet {
 	
-	//ArrayList<Variable> variables;
-	//ArrayList<Variable> evidence;
-	
 	Variable b;
 	Variable e;
 	Variable a;
@@ -153,36 +150,104 @@ public class Bnet {
 			
 			if (args[i].equalsIgnoreCase("Bt")) {
 				if (given == true) {
-					b.s_start = 1;
+					b.s_start = 0;
 					b.s_end = 0;
+					b.g_start = 0;
 					b.g_end = 0; 
 				} else {
-					b.s_end = 1;
+					b.s_start = 0;
+					b.s_end = 0;
 				}
 			} else if (args[i].equalsIgnoreCase("Bf")) {
 				if (given == true) {
 					b.s_start = 1;
-					b.s_end = 0;
+					b.s_end = 1;
+					b.g_start = 1;
 					b.g_end = 1; 
 				} else {
-					b.s_start = 1;	
+					b.s_start = 1;
+					b.s_end = 1;
 				}
 			} else if (args[i].equalsIgnoreCase("Et")) {
-
+				if (given == true) {
+					e.s_start = 0;
+					e.s_end = 0;
+					e.g_start = 0;
+					e.g_end = 0; 
+				} else {
+					e.s_start = 0;
+					e.s_end = 0;
+				}
 			} else if (args[i].equalsIgnoreCase("Ef")) {
-
+				if (given == true) {
+					e.s_start = 1;
+					e.s_end = 1;
+					e.g_start = 1;
+					e.g_end = 1; 
+				} else {
+					e.s_start = 1;
+					e.s_end = 1;
+				}
 			} else if (args[i].equalsIgnoreCase("At")) {
-
+				if (given == true) {
+					a.s_start = 0;
+					a.s_end = 0;
+					a.g_start = 0;
+					a.g_end = 0; 
+				} else {
+					a.s_start = 0;
+					a.s_end = 0;
+				}
 			} else if (args[i].equalsIgnoreCase("Af")) {
-
+				if (given == true) {
+					a.s_start = 1;
+					a.s_end = 1;
+					a.g_start = 1;
+					a.g_end = 1; 
+				} else {
+					a.s_start = 1;
+					a.s_end = 1;
+				}
 			} else if (args[i].equalsIgnoreCase("Jt")) {
-
+				if (given == true) {
+					j.s_start = 0;
+					j.s_end = 0;
+					j.g_start = 0;
+					j.g_end = 0; 
+				} else {
+					j.s_start = 0;
+					j.s_end = 0;
+				}
 			} else if (args[i].equalsIgnoreCase("Jf")) {
-
+				if (given == true) {
+					j.s_start = 1;
+					j.s_end = 1;
+					j.g_start = 1;
+					j.g_end = 1; 
+				} else {
+					j.s_start = 1;
+					j.s_end = 1;
+				}
 			} else if (args[i].equalsIgnoreCase("Mt")) {
-
-			} else if (args[i].equalsIgnoreCase("Et")) {
-
+				if (given == true) {
+					m.s_start = 0;
+					m.s_end = 0;
+					m.g_start = 0;
+					m.g_end = 0; 
+				} else {
+					m.s_start = 0;
+					m.s_end = 0;
+				}
+			} else if (args[i].equalsIgnoreCase("Mf")) {
+				if (given == true) {
+					m.s_start = 1;
+					m.s_end = 1;
+					m.g_start = 1;
+					m.g_end = 1; 
+				} else {
+					m.s_start = 1;
+					m.s_end = 1;
+				}
 			} else {
 				System.out.println("Error with input; please try again");
 				System.exit(0);
@@ -191,7 +256,7 @@ public class Bnet {
 	}
 	
 	public static double calculate (Variable b, Variable e, Variable a, Variable j, Variable m) {
-			Variable var = new Variable();
+			Variable var = new Variable(Variable.Type.NONE);
 			
 			double n = 0;
 			for (int ei = e.g_start; ei < e.g_end; ei++) { //Earthquake

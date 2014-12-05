@@ -24,7 +24,7 @@ public class Variable {
 	Type type;
 	
 	char letter;
-	int iBool;
+	int iBool; //Get rid of me!
 	
 	int s_start;
 	int s_end;
