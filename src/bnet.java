@@ -2,96 +2,98 @@ import java.util.ArrayList;
 
 public class Bnet {
 	
-	Variable b;
-	Variable e;
-	Variable a;
-	Variable j;
-	Variable m;
+	Variable B;
+	Variable E;
+	Variable A;
+	Variable J;
+	Variable M;
 	
 	public Bnet() {
-		b = new Variable('B', Variable.Type.INITIAL);
-		e = new Variable('E', Variable.Type.INITIAL);
-		a = new Variable('A', Variable.Type.INTERMEDIATE);
-		j = new Variable('J', Variable.Type.END);
-		m = new Variable('M', Variable.Type.END);
+		B = new Variable('B', Variable.Type.INITIAL);
+		E = new Variable('E', Variable.Type.INITIAL);
+		A = new Variable('A', Variable.Type.INTERMEDIATE);
+		J = new Variable('J', Variable.Type.END);
+		M = new Variable('M', Variable.Type.END);
+	}
+	
+	public void set_for_true(Variable v, boolean given) {
+		v.s_end = 2;
+		if (given == true) {
+			v.g_end = 2;
+		} 
+	}
+	
+	public void set_for_false(Variable v, boolean given) {
+		v.s_start = 2;
+		if (given == true) {
+			v.g_start = 2;
+		} 
 	}
 	
 	public void handle_input(String[] args) {
 		boolean given = false;
-		System.out.println("B type: " + this.b.type);
 		
 		for (int i = 0; i < args.length; i++) {
-			System.out.println("I: " + i + " Args: " + args[i]);
 			if (args[i].equalsIgnoreCase("given")) {
 				given = true;
 			} else if (args[i].equalsIgnoreCase("Bt")) {
-				this.b.s_end = 0;
-				if (given == true) {
-					this.b.g_end = 0;
-				} 
+				set_for_true(this.B, given);
 			} else if (args[i].equalsIgnoreCase("Bf")) {
-				this.b.s_start = 1;
-				if (given == true) {
-					this.b.g_start = 1;
-				} 
+				set_for_false(this.B, given);
 			} else if (args[i].equalsIgnoreCase("Et")) {
-				this.e.s_end = 0;
-				if (given == true) {
-					this.e.g_end = 0;
-				} 
+				set_for_true(this.E, given);
 			} else if (args[i].equalsIgnoreCase("Ef")) {
-				this.e.s_start = 1;
-				if (given == true) {
-					this.e.g_start = 1;
-				} 
+				set_for_false(this.E, given);
 			} else if (args[i].equalsIgnoreCase("At")) {
-				this.a.s_end = 0;
-				if (given == true) {
-					this.a.g_end = 0;
-				} 
+				set_for_true(this.A, given);
 			} else if (args[i].equalsIgnoreCase("Af")) {
-				this.a.s_start = 1;
-				if (given == true) {
-					this.a.g_start = 1;
-				} 
+				set_for_false(this.A, given);
 			} else if (args[i].equalsIgnoreCase("Jt")) {
-				this.j.s_end = 0;
-				if (given == true) {
-					this.j.g_end = 0;
-				} 
+				set_for_true(this.J, given);
 			} else if (args[i].equalsIgnoreCase("Jf")) {
-				this.j.s_start = 1;
-				if (given == true) {
-					this.j.g_start = 1;
-				} 
+				set_for_false(this.J, given);
 			} else if (args[i].equalsIgnoreCase("Mt")) {
-				this.m.s_end = 0;
-				if (given == true) {
-					this.m.g_end = 0;
-				} 
+				set_for_true(this.M, given);
 			} else if (args[i].equalsIgnoreCase("Mf")) {
-				this.m.s_start = 1;
-				if (given == true) {
-					this.m.g_start = 1;
-				} 
+				set_for_false(this.M, given);
 			} else {
 				System.out.println("Error with input; please try again");
 				System.exit(0);
 			}
 		}
+		
+		System.out.println("Our set values are: ");
+		
+		System.out.println("B: " + B.letter + " " + B.type);
+		System.out.println(B.s_start + " " + B.s_end + " " + B.g_start + " " + B.g_end);
+		
+		System.out.println("E: " + E.letter + " " + E.type);
+		System.out.println(E.s_start + " " + E.s_end + " " + E.g_start + " " + E.g_end);
+		
+		System.out.println("A: " + A.letter + " " + A.type);
+		System.out.println(A.s_start + " " + A.s_end + " " + A.g_start + " " + A.g_end);
+		
+		System.out.println("J: " + J.letter + " " + J.type);
+		System.out.println(J.s_start + " " + J.s_end + " " + J.g_start + " " + J.g_end);
+		
+		System.out.println("M: " + M.letter + " " + M.type);
+		System.out.println(M.s_start + " " + M.s_end + " " + M.g_start + " " + M.g_end);
+		
+		System.out.println("\n");
 	}
 	
-	public static double calculate (Variable b, Variable e, Variable a, Variable j, Variable m) {
-			Variable var = new Variable('x', Variable.Type.NONE);
-			
+	public static double calculate (Variable B, Variable E, Variable A, Variable J, Variable M) {
+			Variable v = new Variable('x', Variable.Type.NONE);
+		
 			//Our numerator is search
 			double n = 0;
-			for (int ei = e.s_start; ei < e.s_end; ei++) { //Earthquake
-				for (int bi = b.s_start; bi < b.s_end; bi++) { //Burglary
-					for (int ai = a.s_start; ai < a.s_end; ai++) { //Alarm
-						for (int ji = j.s_start; ji < j.s_end; ji++) { //John calls
-							for (int mi = m.s_start; mi < m.s_end; mi++) { //Mary calls
-								n = var.P(b, bi, -1, -1) * var.P(e, ei, -1, -1) * var.P(a, ai, bi, ei) * var.P(j, ji, ai, -1) * var.P(m, mi, ai, -1);
+			for (int e = E.s_start; e < E.s_end; e++) { //Earthquake
+				for (int b = B.s_start; b < B.s_end; b++) { //Burglary
+					for (int a = A.s_start; a < A.s_end; a++) { //Alarm
+						for (int j = J.s_start; j < J.s_end; j++) { //John calls
+							for (int m = M.s_start; m < M.s_end; m++) { //Mary calls
+								n = n + (v.P(B, b, -1, -1) * v.P(E, e, -1, -1) * v.P(A, a, b, e) * v.P(J, j, a, -1) * v.P(M, m, a, -1));
+								System.out.println("N: " + n);
 							}
 						}
 					}
@@ -100,19 +102,20 @@ public class Bnet {
 
 			//Our denominator is given 
 			double d = 0;
-			for (int ei = e.g_start; ei < e.g_end; ei++) { //Earthquake
-				for (int bi = b.g_start; bi < b.g_end; bi++) { //Burglary
-					for (int ai = a.g_start; ai < a.g_end; ai++) { //Alarm
-						for (int ji = j.g_start; ji < j.g_end; ji++) { //John calls
-							for (int mi = m.g_start; mi < m.g_end; mi++) { //Mary calls
-								d = var.P(b, bi, -1, -1) * var.P(e, ei, -1, -1) * var.P(a, ai, bi, ei) * var.P(j, ji, ai, -1) * var.P(m, mi, ai, -1);
+			for (int e = E.g_start; e < E.g_end; e++) { //Earthquake
+				for (int b = B.g_start; b < B.g_end; b++) { //Burglary
+					for (int a = A.g_start; a < A.g_end; a++) { //Alarm
+						for (int j = J.g_start; j < J.g_end; j++) { //John calls
+							for (int m = M.g_start; m < M.g_end; m++) { //Mary calls
+								d = d + (v.P(B, b, -1, -1) * v.P(E, e, -1, -1) * v.P(A, a, b, e) * v.P(J, j, a, -1) * v.P(M, m, a, -1));
+								System.out.println("D: " + d);
 							}
 						}
 					}
 				}
 			}
 			
-			return n/d;
+			return (n/d);
 	}
 	
 	
@@ -129,7 +132,7 @@ public class Bnet {
 		
 		Bnet b = new Bnet();
 		b.handle_input(args);
-		double answer = calculate(b.b, b.e, b.a, b.j, b.m);
+		double answer = calculate(b.B, b.E, b.A, b.J, b.M);
 		System.out.println("The probability is: " + answer);	
 	}
 

@@ -40,69 +40,70 @@ public class Variable {
 		g_end = 2; //Not sure
 	}
 	
-	public double P(Variable query, int value, int p1, int p2) {
+	public static double P(Variable query, int value, int p1, int p2) {
 		if (query.type == Type.INITIAL) { //No parents
-			if (query.letter == 'B') { //If dealing with Burglary
-				if (value == 1) {
+			//If dealing with Burglary
+			if (query.letter == 'B') { 
+				if (value == 1) { //If want B = t
 					return PB;
 				}
-				return (1-PB);
+				return (1 - PB); //Else if want B = f
 			} 
+			
 			//Else if dealing with Earthquake
 			if (value == 1) {
-				return PE;
+				return PE; //If want E = t
 			}
-			return (1-PE);
+			return (1 - PE); //Else if want E = f
 			
 			
 		} else if (query.type == Type.INTERMEDIATE) { //Two parents (B = p1, E = p2)
-			if (query.letter == 'A') {
-				if ((p1 == 1) && (p2 == 1)) { //B = t and E = t
-					if (value == 1) {
-						return PA_BT_ET;
-					}
-					return (1 - PA_BT_ET);
-				} else if ((p1 == 1) && (p2 == 0)) { //B = t and E = f
-					if (value == 1) {
-						return PA_BT_EF;
-					}
-					return (1 - PA_BT_EF);
-				} else if ((p1 == 0) && (p2 == 1)) { //B = f and E = t
-					if (value == 1) {
-						return PA_BF_ET;
-					}
-					return (1 - PA_BF_ET);
-				} else if ((p1 == 0) && (p2 == 0)) { //B = f and E = f
-					if (value == 1) {
-						return PA_BF_EF;
-					}
-					return (1 - PA_BF_EF);
-				} 
-			}	
+			//All of the following is for Alarm 
+			if ((p1 == 1) && (p2 == 1)) { //B = t and E = t
+				if (value == 1) {
+					return PA_BT_ET; //If want A = t
+				}
+				return (1 - PA_BT_ET); //Else if want A = f
+			} else if ((p1 == 1) && (p2 == 0)) { //B = t and E = f
+				if (value == 1) {
+					return PA_BT_EF; //If want A = t
+				}
+				return (1 - PA_BT_EF); //Else if want A = f
+			} else if ((p1 == 0) && (p2 == 1)) { //B = f and E = t
+				if (value == 1) {
+					return PA_BF_ET; //If want A = t
+				}
+				return (1 - PA_BF_ET); //Else if want A = f
+			} else if ((p1 == 0) && (p2 == 0)) { //B = f and E = f
+				if (value == 1) {
+					return PA_BF_EF; //If want A = t
+				}
+				return (1 - PA_BF_EF); //Else if want A = f
+			} 
 		} else if (query.type == Type.END) { //One parent
 			if (query.letter == 'J') {
-				if (p1 == 1) { //If A = t
+				if (p1 == 1) { //A = t
 					if (value == 1) {
-						return PJ_AT;
+						return PJ_AT; //If want J = t and A = t 
 					}
-					return (1 - PJ_AT);
-				} else { //If A = f
+					return (1 - PJ_AT); //Else if want J = f and A = t
+				} else { //A = f
 					if (value == 1) {
-						return PJ_AF;
+						return PJ_AF; //If want J = t and A = f
 					}
-					return (1 - PJ_AF);
+					return (1 - PJ_AF); //Else if want J = f and A = f
 				} 
 			} else if (query.letter == 'M') {
-				if (p1 == 1) { //If A = t
+				if (p1 == 1) { //A = t
 					if (value == 1) {
-						return PM_AT;
+						return PM_AT; //If want M = t and A = t 
 					}
-					return (1 - PM_AT);
-				} else { //If A = f
+					return (1 - PM_AT); //If want M = f and A = t
+				} else { //A = f
 					if (value == 1) {
-						return PM_AF;
+						return PM_AF; //If want M = f and A = t 
 					}
-					return (1 - PM_AF);
+					return (1 - PM_AF); //If want M = f adn A = f
 				} 
 			}
 		}
