@@ -144,11 +144,10 @@ public class Bnet {
 		boolean given = false;
 		
 		for (int i = 0; i < args.length; i++) {
+			System.out.println("I: " + i + " Args: " + args[i]);
 			if (args[i].equalsIgnoreCase("given")) {
 				given = true;
-			}
-			
-			if (args[i].equalsIgnoreCase("Bt")) {
+			} else if (args[i].equalsIgnoreCase("Bt")) {
 				if (given == true) {
 					b.s_start = 0;
 					b.s_end = 0;
@@ -258,34 +257,36 @@ public class Bnet {
 	public static double calculate (Variable b, Variable e, Variable a, Variable j, Variable m) {
 			Variable var = new Variable(Variable.Type.NONE);
 			
+			//Our numerator is search
 			double n = 0;
-			for (int ei = e.g_start; ei < e.g_end; ei++) { //Earthquake
-				for (int bi = b.g_start; bi < b.g_end; bi++) { //Burglary
-					for (int ai = a.g_start; ai < a.g_end; ai++) { //Alarm
-						for (int ji = j.g_start; ji < j.g_end; ji++) { //John calls
-							for (int mi = m.g_start; mi < m.g_end; mi++) { //Mary calls
-								n = var.P(b, var, var) 
-										* var.P(e, var, var) 
-										* var.P(a, b, e) 
-										* var.P(j, a, var) 
-										* var.P(m, a, var);
+			for (int ei = e.s_start; ei < e.s_end; ei++) { //Earthquake
+				for (int bi = b.s_start; bi < b.s_end; bi++) { //Burglary
+					for (int ai = a.s_start; ai < a.s_end; ai++) { //Alarm
+						for (int ji = j.s_start; ji < j.s_end; ji++) { //John calls
+							for (int mi = m.s_start; mi < m.s_end; mi++) { //Mary calls
+								n = var.P(b, bi, -1, -1) 
+										* var.P(e, ei, -1, -1) 
+										* var.P(a, ai, bi, ei) 
+										* var.P(j, ji, ai, -1) 
+										* var.P(m, mi, ai, -1);
 							}
 						}
 					}
 				}
 			}
 
+			//Our denomenator is given 
 			double d = 0;
 			for (int ei = e.g_start; ei < e.g_end; ei++) { //Earthquake
 				for (int bi = b.g_start; bi < b.g_end; bi++) { //Burglary
 					for (int ai = a.g_start; ai < a.g_end; ai++) { //Alarm
 						for (int ji = j.g_start; ji < j.g_end; ji++) { //John calls
 							for (int mi = m.g_start; mi < m.g_end; mi++) { //Mary calls
-								d = var.P(b, var, var) 
-										* var.P(e, var, var) 
-										* var.P(a, b, e) 
-										* var.P(j, a, var) 
-										* var.P(m, a, var);
+								d = var.P(b, bi, -1, -1) 
+										* var.P(e, ei, -1, -1) 
+										* var.P(a, ai, bi, ei) 
+										* var.P(j, ji, ai, -1) 
+										* var.P(m, mi, ai, -1);
 							}
 						}
 					}
@@ -309,19 +310,8 @@ public class Bnet {
 		
 		Bnet b = new Bnet();
 		b.handle_input(args);
-		double answer = b.calculate(b.b, b.e, b.a, b.j, b.m);
-		System.out.println("The probability is: " + answer);
-		
-		//b.handle_information();
-		//double n = b.numerator(b.b, b.e, b.a, b.j, b.m);
-		//System.out.println("Numerator value is: " + n);
-		
-		//double d = b.denomenator();
-		//double answer = n/d;
-		
-		//System.out.println("The probability is; " + answer);
-		//b.computeProbability(b.b, b.e, b.a, b.j, b.m);
-	
+		double answer = calculate(b.b, b.e, b.a, b.j, b.m);
+		System.out.println("The probability is: " + answer);	
 	}
 
 }
