@@ -36,8 +36,8 @@ public class Variable {
 		
 		s_start = 0;
 		s_end = 1;
-		g_start = 0; //Not sure
-		g_end = 1; //Not sure
+		g_start = 0; 
+		g_end = 1; 
 	}
 	
 	public static double P(Variable query, int value, int p1, int p2) {

@@ -19,14 +19,14 @@ public class Bnet {
 	public void set_for_true(Variable v, boolean given) {
 		v.s_end = 0;
 		if (given == true) {
-			v.g_end = 0;
+			v.g_end = 1;
 		} 
 	}
 	
 	public void set_for_false(Variable v, boolean given) {
 		v.s_start = 1;
 		if (given == true) {
-			v.g_start = 1;
+			v.g_start = 2;
 		} 
 	}
 	
@@ -87,8 +87,8 @@ public class Bnet {
 		
 			//Our numerator is search
 			double n = 0;
-			for (int e = E.s_start; e <= E.s_end; e++) { //Earthquake
-				for (int b = B.s_start; b <= B.s_end; b++) { //Burglary
+			for (int b = B.s_start; b <= B.s_end; b++) { //Earthquake
+				for (int e = E.s_start; e <= E.s_end; e++) { //Burglary
 					for (int a = A.s_start; a <= A.s_end; a++) { //Alarm
 						for (int j = J.s_start; j <= J.s_end; j++) { //John calls
 							for (int m = M.s_start; m <= M.s_end; m++) { //Mary calls
@@ -102,8 +102,8 @@ public class Bnet {
 
 			//Our denominator is given 
 			double d = 0;
-			for (int e = E.g_start; e <= E.g_end; e++) { //Earthquake
-				for (int b = B.g_start; b <= B.g_end; b++) { //Burglary
+			for (int b = B.g_start; b <= B.g_end; b++) { //Earthquake
+				for (int e = E.g_start; e <= E.g_end; e++) { //Burglary
 					for (int a = A.g_start; a <= A.g_end; a++) { //Alarm
 						for (int j = J.g_start; j <= J.g_end; j++) { //John calls
 							for (int m = M.g_start; m <= M.g_end; m++) { //Mary calls
