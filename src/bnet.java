@@ -18,111 +18,62 @@ public class Bnet {
 	
 	public void handle_input(String[] args) {
 		boolean given = false;
+		System.out.println("B type: " + this.b.type);
 		
 		for (int i = 0; i < args.length; i++) {
 			System.out.println("I: " + i + " Args: " + args[i]);
 			if (args[i].equalsIgnoreCase("given")) {
 				given = true;
 			} else if (args[i].equalsIgnoreCase("Bt")) {
+				this.b.s_end = 0;
 				if (given == true) {
-					b.s_start = 0;
-					b.s_end = 0;
-					b.g_start = 0;
-					b.g_end = 0; 
-				} else {
-					b.s_start = 0;
-					b.s_end = 0;
-				}
+					this.b.g_end = 0;
+				} 
 			} else if (args[i].equalsIgnoreCase("Bf")) {
+				this.b.s_start = 1;
 				if (given == true) {
-					b.s_start = 1;
-					b.s_end = 1;
-					b.g_start = 1;
-					b.g_end = 1; 
-				} else {
-					b.s_start = 1;
-					b.s_end = 1;
-				}
+					this.b.g_start = 1;
+				} 
 			} else if (args[i].equalsIgnoreCase("Et")) {
+				this.e.s_end = 0;
 				if (given == true) {
-					e.s_start = 0;
-					e.s_end = 0;
-					e.g_start = 0;
-					e.g_end = 0; 
-				} else {
-					e.s_start = 0;
-					e.s_end = 0;
-				}
+					this.e.g_end = 0;
+				} 
 			} else if (args[i].equalsIgnoreCase("Ef")) {
+				this.e.s_start = 1;
 				if (given == true) {
-					e.s_start = 1;
-					e.s_end = 1;
-					e.g_start = 1;
-					e.g_end = 1; 
-				} else {
-					e.s_start = 1;
-					e.s_end = 1;
-				}
+					this.e.g_start = 1;
+				} 
 			} else if (args[i].equalsIgnoreCase("At")) {
+				this.a.s_end = 0;
 				if (given == true) {
-					a.s_start = 0;
-					a.s_end = 0;
-					a.g_start = 0;
-					a.g_end = 0; 
-				} else {
-					a.s_start = 0;
-					a.s_end = 0;
-				}
+					this.a.g_end = 0;
+				} 
 			} else if (args[i].equalsIgnoreCase("Af")) {
+				this.a.s_start = 1;
 				if (given == true) {
-					a.s_start = 1;
-					a.s_end = 1;
-					a.g_start = 1;
-					a.g_end = 1; 
-				} else {
-					a.s_start = 1;
-					a.s_end = 1;
-				}
+					this.a.g_start = 1;
+				} 
 			} else if (args[i].equalsIgnoreCase("Jt")) {
+				this.j.s_end = 0;
 				if (given == true) {
-					j.s_start = 0;
-					j.s_end = 0;
-					j.g_start = 0;
-					j.g_end = 0; 
-				} else {
-					j.s_start = 0;
-					j.s_end = 0;
-				}
+					this.j.g_end = 0;
+				} 
 			} else if (args[i].equalsIgnoreCase("Jf")) {
+				this.j.s_start = 1;
 				if (given == true) {
-					j.s_start = 1;
-					j.s_end = 1;
-					j.g_start = 1;
-					j.g_end = 1; 
-				} else {
-					j.s_start = 1;
-					j.s_end = 1;
-				}
+					this.j.g_start = 1;
+				} 
 			} else if (args[i].equalsIgnoreCase("Mt")) {
+				this.m.s_end = 0;
 				if (given == true) {
-					m.s_start = 0;
-					m.s_end = 0;
-					m.g_start = 0;
-					m.g_end = 0; 
-				} else {
-					m.s_start = 0;
-					m.s_end = 0;
-				}
+					this.m.g_end = 0;
+				} 
 			} else if (args[i].equalsIgnoreCase("Mf")) {
+				this.m.s_start = 1;
 				if (given == true) {
-					m.s_start = 1;
-					m.s_end = 1;
-					m.g_start = 1;
-					m.g_end = 1; 
-				} else {
-					m.s_start = 1;
-					m.s_end = 1;
-				}
+					this.m.g_start = 1;
+				} 
 			} else {
 				System.out.println("Error with input; please try again");
 				System.exit(0);
@@ -140,11 +91,7 @@ public class Bnet {
 					for (int ai = a.s_start; ai < a.s_end; ai++) { //Alarm
 						for (int ji = j.s_start; ji < j.s_end; ji++) { //John calls
 							for (int mi = m.s_start; mi < m.s_end; mi++) { //Mary calls
-								n = var.P(b, bi, -1, -1) 
-										* var.P(e, ei, -1, -1) 
-										* var.P(a, ai, bi, ei) 
-										* var.P(j, ji, ai, -1) 
-										* var.P(m, mi, ai, -1);
+								n = var.P(b, bi, -1, -1) * var.P(e, ei, -1, -1) * var.P(a, ai, bi, ei) * var.P(j, ji, ai, -1) * var.P(m, mi, ai, -1);
 							}
 						}
 					}
@@ -158,11 +105,7 @@ public class Bnet {
 					for (int ai = a.g_start; ai < a.g_end; ai++) { //Alarm
 						for (int ji = j.g_start; ji < j.g_end; ji++) { //John calls
 							for (int mi = m.g_start; mi < m.g_end; mi++) { //Mary calls
-								d = var.P(b, bi, -1, -1) 
-										* var.P(e, ei, -1, -1) 
-										* var.P(a, ai, bi, ei) 
-										* var.P(j, ji, ai, -1) 
-										* var.P(m, mi, ai, -1);
+								d = var.P(b, bi, -1, -1) * var.P(e, ei, -1, -1) * var.P(a, ai, bi, ei) * var.P(j, ji, ai, -1) * var.P(m, mi, ai, -1);
 							}
 						}
 					}

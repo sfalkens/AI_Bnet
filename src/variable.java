@@ -34,10 +34,10 @@ public class Variable {
 		letter = l;
 		type = t;
 		
-		s_start = 0;
-		s_end = 1;
-		g_start = 0;
-		g_end = 1;
+		s_start = 1;
+		s_end = 2;
+		g_start = 1; //Not sure
+		g_end = 2; //Not sure
 	}
 	
 	public double P(Variable query, int value, int p1, int p2) {
