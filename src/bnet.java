@@ -17,16 +17,16 @@ public class Bnet {
 	}
 	
 	public void set_for_true(Variable v, boolean given) {
-		v.s_end = 2;
+		v.s_end = 0;
 		if (given == true) {
-			v.g_end = 2;
+			v.g_end = 0;
 		} 
 	}
 	
 	public void set_for_false(Variable v, boolean given) {
-		v.s_start = 2;
+		v.s_start = 1;
 		if (given == true) {
-			v.g_start = 2;
+			v.g_start = 1;
 		} 
 	}
 	
@@ -114,6 +114,11 @@ public class Bnet {
 					}
 				}
 			}
+			
+			System.out.println("");
+			System.out.println("Final values =====================");
+			System.out.println("N: " + n);
+			System.out.println("D: " + d);
 			
 			return (n/d);
 	}
