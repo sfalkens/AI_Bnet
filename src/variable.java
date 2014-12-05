@@ -20,20 +20,28 @@ public class Variable {
 	public enum Type {
 		INITIAL, INTERMEDIATE, END, NONE
 	}
-	
-	char letter;
-	boolean bool;
-	
-	int iBool;
+		
 	Type type;
 	
+	char letter;
+	int iBool;
+	
+	int s_start;
+	int s_end;
+	int g_start;
+	int g_end;
+	
+	//double[] probabilities;
+	
 	//Default constructor
-	public Variable() {
-		letter = 'x';
-		boolean bool;
-		
+	public Variable(Type t) {		
 		int iBool = 0;
-		type = Type.NONE;
+		type = t;
+		
+		s_start = 0;
+		s_end = 1;
+		g_start = 0;
+		g_end = 1;
 	}
 	
 	public double P(Variable query, Variable p1, Variable p2) {
